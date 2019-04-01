@@ -1,0 +1,57 @@
+<html>
+  <head></head>
+  <body>
+  	<p>
+      <% if error %>
+  		<h1>ERROR</h1>
+  		<h3>Invalid Parameters.</h3>
+  		<p>Please enter:
+  		</br>
+  		<ol>
+  			<li>1. A single-character true symbol</li>
+  			<li>2. A single-character false symbol</li>
+  			<li>A size greater than or equal to 2</li>
+  			<li>Different chracters for the true and false symbols</li>
+  		</ol>
+  		<a href='/'>Back to main page</a>
+      <% end %>
+      <p>
+      <% unless error %>
+      <table>
+        <tr>
+        <!-- display table header -->
+          <th><%= table_nums %></th>
+          <th>AND</th>
+          <th>OR</th>
+          <th>NAND</th>
+          <th>NOR</th>
+        </tr>
+        <!-- loop to generate table rows -->
+        <% x = 0 %>
+        <% table.each do |i| %>
+          <tr>
+            <td><%= table[x.to_i] %></td>
+            <% if x == 0 %>
+              <td><%= pg_false %></td>
+              <td><%= pg_false %></td>
+              <td><%= pg_truth %></td>
+              <td><%= pg_truth %></td>
+            <% elsif x == table.length-1 %>
+              <td><%= pg_truth %></td>
+              <td><%= pg_truth %></td>
+              <td><%= pg_false %></td>
+              <td><%= pg_false %></td>
+            <% else %>
+              <td><%= pg_false %></td>
+              <td><%= pg_truth %></td>
+              <td><%= pg_truth %></td>
+              <td><%= pg_false %></td>
+            <% end %>
+          </tr>
+          <% x = x+1 %>
+        <% end %>
+      </table>
+      <a href='/'>Back to main page</a>
+      <% end %>
+  </body>
+</html>
